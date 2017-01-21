@@ -19,10 +19,10 @@ data =  {
 
 body = str.encode(json.dumps(data))
 
-url = 'https://ussouthcentral.services.azureml.net/workspaces/cc48e0eb5dcc430b9c34b3e5bf954a89/services/f5e4b5e00f924e288b1f519d412df288/execute?api-version=2.0&details=true'
+url = 'https://asiasoutheast.services.azureml.net/workspaces/46d0e60b05b34558827abd41f11d204f/services/acac88a083ce443789028306375ddf56/execute?api-version=2.0&details=true'
 
 
-api_key = '<YOUR_API_KEY>' # Replace this with the API key for the web service
+api_key = '<change here>' # Replace this with the API key for the web service
 headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
 req = urllib2.Request(url, body, headers) 

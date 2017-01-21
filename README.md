@@ -33,6 +33,8 @@ https://aka.ms/dpartybot
 ### Machine Learning algorithm
 Machine Learning에서 데이터를 활용해 예측 분석 서비스가 가능하도록 학습시키기 위한 알고리듬 및 Machine Learning workflow 를 구현  
 
+![Iris Azure Mahchine Learning 예측 모델](images/iris-model.png)  
+
 [고객이탈 예측(Game user churn prediction) real-time prediction & Batch prediction](https://gallery.cortanaintelligence.com/Experiment/CloudBread-game-user-churn-prediction-1)  
 
 ![CloudBread Game User Chrun](images/20-1.png)  
@@ -159,6 +161,8 @@ except urllib2.HTTPError, error:
 User Churn Predition을 수행하는 RRE를 수행하는 예제  
 python 폴더 하위의 ml-user-churn.py 파일 참조  
 
+####Python2
+
 ```
 import urllib2
 # If you are using Python 3+, import urllib instead of urllib2
@@ -172,8 +176,8 @@ data =  {
 
                 "input1":
                 {
-                    "ColumnNames": ["MemberID", "LastLoginDT", "Level", "Exps", "Points", "SumItemCount", "SumPurchasePrice", "ChurnYN"],
-                    "Values": [ [ "value", "value", "0", "0", "0", "0", "0", "value" ], [ "value", "value", "0", "0", "0", "0", "0", "value" ], ]
+                    "ColumnNames": ["Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width", "Species"],
+                    "Values": [ [ "1", "1", "1", "1", "" ], ]
                 },        },
             "GlobalParameters": {
 }
@@ -181,8 +185,10 @@ data =  {
 
 body = str.encode(json.dumps(data))
 
-url = 'https://asiasoutheast.services.azureml.net/workspaces/<ML-API-URL>'
-api_key = '<API-KEY>' # Replace this with the API key for the web service
+url = 'https://ussouthcentral.services.azureml.net/workspaces/cc48e0eb5dcc430b9c34b3e5bf954a89/services/f5e4b5e00f924e288b1f519d412df288/execute?api-version=2.0&details=true'
+
+
+api_key = '<YOUR_API_KEY>' # Replace this with the API key for the web service
 headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
 req = urllib2.Request(url, body, headers) 
@@ -203,6 +209,49 @@ except urllib2.HTTPError, error:
     print(error.info())
 
     print(json.loads(error.read()))                 
+
+```
+
+####Python3
+
+```
+import urllib
+# If you are using Python 3+, import urllib instead of urllib2
+import json
+import re
+import requests
+
+
+data =  {
+
+        "Inputs": {
+
+                "input1":
+                {
+                    "ColumnNames": ["Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width", "Species"],
+                    "Values": [ [ "1", "1", "1", "1", "" ], ]
+                },        },
+            "GlobalParameters": {
+}
+    }
+
+body = str.encode(json.dumps(data))
+
+url = 'https://ussouthcentral.services.azureml.net/workspaces/a742afb173054d3ca4c4568eb889bb2d/services/13f806c7378e4d418a059f7e3a4a97bb/execute?api-version=2.0&details=true'
+api_key = '<YOUR_API_KEY>' # Replace this with the API key for the web service
+headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
+
+req = urllib.request.Request(url, body, headers)
+response = urllib.request.urlopen(req)
+
+
+    # If you are using Python 3+, replace urllib2 with urllib.request in the above code:
+    # req = urllib.request.Request(url, body, headers)
+    # response = urllib.request.urlopen(req)
+
+result = response.read()
+print(result)
+
 
 ```
 
